@@ -1,0 +1,28 @@
+1. SASS
+ - Used for styling.
+ - Advanced CSS.
+ - npm install node-sass 
+ - & means class above it and it wants to append the additional selector
+
+2. Git
+ - New repository
+ - copy SSH link e.g. https://github.com/Delvin2011/lavie-clothing.git
+ - git remote add origin https://github.com/Delvin2011/lavie-clothing.git
+
+3. DOM bindings for React Router DOm.
+ - npm install --save react-router-dom
+ - https://reacttraining.com/react-router/
+ - BrowserRouter gives the App all the functionality that the react-router-dom provides.
+ - <Switch> - As long as one route matched, thats what will be rendered.
+ - exact renderes exactly what on the path. (if no exact, all the paths follows will also render on the homepage)
+ - Switch and exact used to determine what component to mount, without re-rendering the whole application
+ - match, history and location.
+ - Even though Directory and Menu item are children of HomePage component, Only the homepage gets access to the history prop.
+
+4. withRouter
+ - Takes a component as a an argument and returns a modified component.
+ - is a higher order component that will pass closest route's match , current location , and history props to the wrapped component whenever it renders.
+ - its like a function that gives a powered up component.
+ - e.g. pass MenuItem into withRouter.
+ - withRouter will return us back a super powered component, with access to location, match, history prps that we need access to.
+ - e.g. if we are to change our URL at any moment, our component is still aware and functional bcoz it knows its just gonna base where its been matched up to and open the URL
