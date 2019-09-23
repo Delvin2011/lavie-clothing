@@ -2,3 +2,8 @@ body {
     font-family: 'Open Sans Condensed';
     padding: 20px 80px;
 }
+
+a { /*to remove the underline and set color black on the headers*/
+    text-decoration: none;
+    color: black;
+}

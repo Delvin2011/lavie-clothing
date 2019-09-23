@@ -26,3 +26,8 @@
  - e.g. pass MenuItem into withRouter.
  - withRouter will return us back a super powered component, with access to location, match, history prps that we need access to.
  - e.g. if we are to change our URL at any moment, our component is still aware and functional bcoz it knows its just gonna base where its been matched up to and open the URL
+
+5. SVG
+ - scalable vector image. very small.
+ - Special syntax for importing SVG (ReactComponent as Logo)
+ - he ReactComponent import name is special and tells Create React App that you want a React component that renders an SVG, rather than its filename.

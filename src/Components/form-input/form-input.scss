@@ -1,0 +1,60 @@
+$sub-color: grey; //wherever we call sub-color, it will substitute with grey color.
+$main-color: black;
+
+@mixin shrinkLabel {//is an easy way of including shrinkLabel wherever, shrinkLabel is included.
+  top: -14px; //more like reusable pieces of scss.
+  font-size: 12px;
+  color: $main-color;
+}
+
+.group {
+  position: relative;
+  margin: 45px 0;
+
+  .form-input {
+    background: none;
+    background-color: white;
+    color: $sub-color;
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid $sub-color;
+    margin: 25px 0;
+
+    &:focus {
+      outline: none;
+    }
+
+    /*whenever the browser is focused on that input, then we want to target the form-input-label and we want to include shrinklabel
+    - (move up, change the font color and size)
+    - because now our label sits inside the form-input-label
+    - adding a transition of 300ms*/
+    &:focus ~ .form-input-label { 
+      @include shrinkLabel();
+    }
+  }
+
+  input[type='password'] {
+    letter-spacing: 0.3em;
+  }
+
+  .form-input-label {
+    color: $sub-color;
+    font-size: 16px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 300ms ease all;
+
+    &.shrink {
+      @include shrinkLabel();
+    }
+  }
+}
+
+
