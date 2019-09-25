@@ -31,3 +31,8 @@
  - scalable vector image. very small.
  - Special syntax for importing SVG (ReactComponent as Logo)
  - he ReactComponent import name is special and tells Create React App that you want a React component that renders an SVG, rather than its filename.
+
+6. Firebase
+ - Authentication and storage
+ - npm install --save firebase
+ - npm install firebase --force (used)

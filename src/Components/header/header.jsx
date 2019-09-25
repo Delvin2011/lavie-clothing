@@ -1,11 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
+import {auth} from '../../firebase/firebase.utils';
 
 
 import './header.scss';
 
-const Header = () => (
+const Header = ({currentUser}) => ( //destructure the currentUser property
     <div className = 'header'>
         <Link className = 'logo-container' to="/">
             <Logo className = 'logo'/>
@@ -17,6 +18,12 @@ const Header = () => (
             <Link className = 'option' to='/shop'>
                 CONTACT
             </Link>
+            {
+                currentUser ? //conditionally render a div if tru (currentUser is an object) and Link if false (currentUser is null)
+                <div className = 'option' onClick = {() => auth.signOut()}>SIGN OUT</div> //functional callback that calls auth.signOut (from firebase)
+                :
+                <Link className = 'option' to = '/signin'>SIGN IN</Link>
+            }
         </div>
     </div>
 )

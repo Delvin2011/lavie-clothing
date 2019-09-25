@@ -2,6 +2,7 @@ import React from 'react';
 
 import FormInput from '../../Components/form-input/form-input';
 import CustomButton from '../../Components/custom-button/custom-button';
+import {signInWithGoogle} from '../../firebase/firebase.utils';
 import './sign-in.scss';
 
 class SignIn extends React.Component {
@@ -33,8 +34,10 @@ class SignIn extends React.Component {
                 <form onSubmit = {this.handleSubmit}>
                     <FormInput name = "email" type = "email" value = {this.state.email} handleChange={this.handleChange} label = 'Email' required />
                     <FormInput name = "password" type = "password" value = {this.state.password} handleChange={this.handleChange} label='Password' required />
-
-                    <CustomButton type = "submit"> Sign In </CustomButton>
+                    <div className='buttons'>
+                        <CustomButton type = "submit"> Sign In </CustomButton>
+                        <CustomButton onClick = {signInWithGoogle} isGoogleSignIn>{''}SIGN IN WITH GOOGLE{''}</CustomButton>
+                    </div>
                 </form>
             </div>
         )
@@ -42,3 +45,6 @@ class SignIn extends React.Component {
 }
 
 export default SignIn;
+
+//onClick will call the signInWithGoogle method to handle the authentication
+//isGoogleSignIn property will get passed a value of true, if we dont pass a value to it.

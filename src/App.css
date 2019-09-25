@@ -7,3 +7,7 @@ a { /*to remove the underline and set color black on the headers*/
     text-decoration: none;
     color: black;
 }
+
+* { /*Universal sizing, applies to all scss*/
+    box-sizing: border-box;
+}
