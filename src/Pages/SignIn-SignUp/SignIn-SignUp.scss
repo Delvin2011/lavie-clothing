@@ -1,0 +1,8 @@
+//for the sign and sign up to be side by side
+.SignIn-SignUp {
+    width: 850px;
+    display: flex;
+    justify-content: space-between;
+
+    margin: 30px auto;
+}

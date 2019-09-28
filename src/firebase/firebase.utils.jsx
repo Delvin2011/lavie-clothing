@@ -14,6 +14,39 @@ const config = {
 
 firebase.initializeApp(config); //firebase initialisation
 
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  if(!userAuth) return;
+
+  const userRef = firestore.doc(`users/${userAuth.uid}`); //string interpolation. Checking if the user object from the authentication, exists in the database.
+  //uid is the dynamically generated ID string that google made when authentication the user using google signIN
+  //use the snapSHot to check if or if not data exist
+  const snapShot = await userRef.get();
+
+  //the 'exists' on the snapShot tells us if their is any user data.
+  // if no data, create data using the user.Auth object (take from the object what we need to stroe in the database) and put in users collection.
+  if(!snapShot.exists) {
+    const {displayName, email} = userAuth;
+    const createdAt = new Date(); //the time when the is created.
+
+    //asynchronous request to the database to store the data.
+    //if user does not exist, set user
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...additionalData
+      })
+
+    } catch (error){
+  console.log('error creating user', error.message)
+    }
+  }
+
+  console.log(snapShot);
+  return userRef;
+}
+
   //required for google authentication
 
 export const auth = firebase.auth(); //.auth() from import 'firebase/auth'

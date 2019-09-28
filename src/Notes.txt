@@ -36,3 +36,7 @@
  - Authentication and storage
  - npm install --save firebase
  - npm install firebase --force (used)
+ - Cloud Firestore, is a no SQL database. Giahantic json object.
+ - Collection - a group of objects - a document, an array of things. e.g. /users
+ - Collections can also point to other collections
+ - adding a user will be adding a document. every document/user needs a unique identifier.
