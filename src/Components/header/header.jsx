@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux'; //high order component that lets us modify our component to have access to things related to redux.
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import {auth} from '../../firebase/firebase.utils';
+import CartIcon from '../cart-icon/cart-icon';
 
 
 import './header.scss';
@@ -25,6 +26,7 @@ const Header = ({currentUser}) => ( //destructure the currentUser property
                 :
                 <Link className = 'option' to = '/signin'>SIGN IN</Link>
             }
+            <CartIcon />
         </div>
     </div>
 )

@@ -10,7 +10,7 @@ import store from './redux/store';
 
 
 ReactDOM.render(
-   <Provider store = {store}> dispatch actions to the store
+   <Provider store = {store}> 
       <BrowserRouter>
          <App />
       </BrowserRouter>
