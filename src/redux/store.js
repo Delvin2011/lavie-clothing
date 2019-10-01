@@ -2,8 +2,7 @@
 //Middleware, functions that take actions and gives output to reducers.
 
 import { createStore, applyMiddleware} from 'redux';
-import logger from 'react-redux'; //to use for debugging redux code
-
+import logger from 'redux-logger'; //to use for debugging redux code
 import rootReducer from './root-reducer';
 
 //the middleware that the store is expecting from redux, is going to be an array.

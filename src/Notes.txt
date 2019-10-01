@@ -45,24 +45,9 @@
  - Whenever we call the onAuthStateChanged() or onSnapshot() methods from our auth  library or referenceObject, we get back a function that lets us unsubscribe from the listener we just instantiated. Which lifecycle method should we use to call that unsubscribe method in?
  - Answer: - Calling the unsubscribe function when the component is about to unmount is the best way to make sure we don't get any memory leaks in our application related to listeners still being open even if the component that cares about the listener is no longer on the page.
 
-8. Redux
- - React is a UI library
- - Redux makes the state more scalable (State management)
- - Keep the state in a store (one single object that describes how our App should look)
- - None of the components would need to hold state anymore.
- - When the state changes, the changes can be passed doen to the components.
- - Useful for sharing state with components
- - Redux Flow (Action -> Root Reducer (function that gives an output) -> Store (State) -> DOM changes (React notices STATE change and makes changes to the view layer))
- - React only rerenders if the props are different. if you pass a new object.
- - The reducers only change if the type is relevant to it.
- - A reducer is just a function that takes the state and the action, and based on the action, it determines whether or not it needs to re-render and it returns an object that goes to whatever the payload was.
- - Job of React Developer
-    - Decide on Components
-    - Decide the state and where is lives.
-    - What changes when the state changes
+8. Plans -Future
+ - Chat box
+ - Receipt upon purchase
+ - store order in database
 
-9. Redux install
- - npm add redux redux-logger react-redux
- - Redux component to be put in Index.js.
- - That will give the application access to the store and the reducers. import {Provider}
- - Provider - Store object - Allows access to the store
+9. 

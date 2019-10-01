@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom'; //Redirect - to prohibit signin route once user is signed in. to avoid Auth flow
+import {connect} from 'react-redux'; //high order component that lets us modify our component to have access to things related to redux.
 import HomePage from './Pages/homepage/homepage';
 import ShopPage from './Pages/shop/shop';
 import SignInAndSignUpPage from './Pages/SignIn-SignUp/SignIn-SignUp';
 import Header from './Components/header/header';
 import {auth} from './firebase/firebase.utils';
 import { createUserProfileDocument } from './firebase/firebase.utils';
+import {setCurrentUser} from './redux/user/user-actions';
 
 /*we want to store the state of our user in the App (where from Google signin or email and password), so that when the user logs in, we want to store that in the App state*/
 /*So that, so that we can pass into components that need it, because we want to access the user object throughout the application*/
@@ -14,19 +16,13 @@ import { createUserProfileDocument } from './firebase/firebase.utils';
 
 /*How to make sure the application has been added and authenticated by firebase*/
 class App extends React.Component {
-  constructor(){
-    super();
-
-    this.state = {
-      currentUser: null
-    }
-  }
-
-  //when unmount, we need to close subscription, to prevent memory leaks in our App
+//when unmount, we need to close subscription, to prevent memory leaks in our App
 // the application is always listening to authentication state change.
   unsubscribeFromAuth = null;
 
   componentDidMount() { //normally we use fetch to get data from the backend, but its a once off thing
+
+    const {setCurrentUser} = this.props;
     //but we always want to know when firebase authentication state has changed.
     //e.g when signout, we want to knw automatically wout having to fetch. {auth} - gives us that easily
     //this is an open subscription, open messaging system btwn application & firebase.
@@ -39,26 +35,14 @@ class App extends React.Component {
 
         //listening/subscribe to the userRef for any changes in the data
         userRef.onSnapshot(snapShot => { //returns the data of the user, authenticated or already stored in the database
-          this.setState({
-            currentUser: {
+          setCurrentUser({
               id: snapShot.id, //returns the id
               ...snapShot.data() //returns the user object stored in the database, need to have .data().
-            }
-          }, //console log when state has finished, since its asynchronous
-          () => {
-            console.log(this.state);
-          });
+          });//console log when state has finished, since its asynchronous    
         });
-   
       }
       //if user logs out, set currentUser to null (that will come from the Auth libray).
-      else
-      {
-        this.setState({currentUser: userAuth});
-      }
-      
-      
-     
+      setCurrentUser(userAuth);
     }); //notifies of user state change.
   }
 
@@ -71,11 +55,13 @@ class App extends React.Component {
   render(){
     return (
       <div > 
-        <Header currentUser = {this.state.currentUser}/>
+        <Header/>
         <Switch>
           <Route exact path='/' component = {HomePage}/> 
           <Route path='/shop' component = {ShopPage}/>  
-          <Route path='/signin' component = {SignInAndSignUpPage}/>  
+          <Route exact path='/signin' render = {() => this.props.currentUser
+            ? (<Redirect to='/' />) 
+            : (<SignInAndSignUpPage />)}/>  
 
         </Switch>  
       </div>
@@ -83,4 +69,18 @@ class App extends React.Component {
   }
 }
 
-export default App;
+//render - Javascript invokation that determines what component to return.
+//used to reroute to home page once user is signed in.
+
+const mapStateToProps = ({user}) => ({
+  currentUser: user.currentUser
+});
+
+const mapDispatchToProps = dispatch => ({ //gets the dispatch property (dispatches the new action we need to pass, SET_CURRENT_USER)
+  // returns setCurrentUser, goes to function that gets the user object and calls dispatch
+  //dispatch is a way for redux to know the object being passed is an action object that is going to be passed to every reducer.
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+})
+//App doesn't need the current user state, apart from the header component, it only sets the default state.
+//Therefore passing null.
+export default connect(mapStateToProps, mapDispatchToProps)(App);
