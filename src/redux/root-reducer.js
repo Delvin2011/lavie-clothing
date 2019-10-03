@@ -5,6 +5,9 @@ import { combineReducers } from 'redux';
 
 import userReducer from './user/user-reducer';
 
+import cartReducer from './cart/cart-reducer';
+
 export default combineReducers({
-    user: userReducer //user is the key, passing the reducer that we want. and returns in one giant object.
+    user: userReducer, //user is the key, passing the reducer that we want. and returns in one giant object.
+    cart: cartReducer
 })
