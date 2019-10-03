@@ -84,3 +84,5 @@ const mapDispatchToProps = dispatch => ({ //gets the dispatch property (dispatch
 //App doesn't need the current user state, apart from the header component, it only sets the default state.
 //Therefore passing null.
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+/*mapDispatchToProps pass function that can trigger state change to your component props and mapStateToProps pass state to your component props*/

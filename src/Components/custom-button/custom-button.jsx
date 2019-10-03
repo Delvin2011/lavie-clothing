@@ -2,8 +2,10 @@ import React from 'react';
 
 import './custom-button.scss';
 
-const CustomButton = ({children, isGoogleSignIn, ...otherProps}) => ( //conditionally render (using string interpolation) a classname based of a prop (if isGoogleSignIn is true)
-    <button className = {`${isGoogleSignIn ? 'google-sign-in': '' } custom-button`} {...otherProps}> 
+const CustomButton = ({children, isGoogleSignIn, inverted, ...otherProps}) => ( //conditionally render (using string interpolation) a classname based of a prop (if isGoogleSignIn or inverted(add to cart button) is true)
+    <button className = {`${inverted ? 'inverted': '' }
+        ${isGoogleSignIn ? 'google-sign-in': '' } custom-button`} 
+        {...otherProps}> 
     {children}
 
     </button>

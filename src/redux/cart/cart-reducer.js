@@ -1,8 +1,10 @@
 //hide the website when 1st comes to website
 import CartActionTypes from './cart-type';
+import { addItemToCart } from './cart-utils';
 
 const INITIAL_STATE = {
-    hidden: true
+    hidden: true,
+    cartItems: [] //adding or removing cart items
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -11,9 +13,16 @@ const cartReducer = (state = INITIAL_STATE, action) => {
             return{
                 ...state,
                 hidden: !state.hidden
+            };
+        case CartActionTypes.ADD_ITEM:
+            return{
+                ...state,
+                cartItems: addItemToCart(state.cartItems, action.payload) //add new items to the existing list
             }
             default:
                 return state;
+        
+            
 
     }
 }   

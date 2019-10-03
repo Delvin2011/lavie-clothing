@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {toggleCartHidden} from '../../redux/cart/cart.actions';
+import {toggleCartHidden} from '../../redux/cart/cart-actions';
 import {ReactComponent as ShoppingIcon} from '../../assets/shopping-bag.svg';
 
 import './cart-icon.scss';
@@ -17,3 +17,5 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect (null, mapDispatchToProps) (CartIcon);
+
+/*mapDispatchToProps pass function that can trigger state change to your component props and mapStateToProps pass state to your component props*/
