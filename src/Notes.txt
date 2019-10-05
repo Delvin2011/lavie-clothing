@@ -50,4 +50,11 @@
  - Receipt upon purchase
  - store order in database
 
-9. 
+9. mapStateToProps vs mapDispatchToProps
+ - As the names would suggest, mapStateToProps connects the Redux state into your component via props (reference your root reducer to see all the various states that you have declared).
+   You'll need to use it when a particular component requires some info from the global state.
+ - Whereas mapDispatchToProps will connect your action creators to your component (actions you've created in your xxx.action.js files if you've followed the naming convention from the course).
+
+10. Reselect
+ - used to memoize and not re-render a component if the state value does not change, e.g dropdown and item count components not re-rendered when state changes are unrelated to them.
+ - npm install reselect
