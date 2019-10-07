@@ -1,11 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux'; //high order component that lets us modify our component to have access to things related to redux.
+import {createStructuredSelector} from 'reselect';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import {auth} from '../../firebase/firebase.utils';
 import CartIcon from '../cart-icon/cart-icon';
 import CartDropdown from '../cart-dropdown/cart-dropdown';
-
+import {selectCartHidden} from '../../redux/cart/cart-selectors';
+import {selectCurrentUser} from '../../redux/user/user-selectors';
 
 import './header.scss';
 
@@ -38,8 +40,10 @@ const Header = ({currentUser,hidden}) => ( //destructure the currentUser propert
     </div>
 )
 
-const mapStateToProps = ({user:{currentUser}, cart:{hidden}}) => ({ //state will be the root.reducer
-    currentUser,
-    hidden //to show or hide the cart.
+//createStructuredSelector - properties that we want point to the correct selector
+//will get our state into the subsequent selector: currentUser, hidden
+const mapStateToProps = createStructuredSelector({ //state will be the root.reducer
+    currentUser : selectCurrentUser,
+    hidden: selectCartHidden //to show or hide the cart.
 }) //naming mapStateToProps can be anything
 export default connect(mapStateToProps)(Header);

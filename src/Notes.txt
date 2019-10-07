@@ -58,3 +58,6 @@
 10. Reselect
  - used to memoize and not re-render a component if the state value does not change, e.g dropdown and item count components not re-rendered when state changes are unrelated to them.
  - npm install reselect
+ - Selectors can compute derived data, allowing Redux to store the minimal possible state.
+ - Selectors are efficient. A selector is not recomputed unless one of its arguments changes.
+ - Selectors are composable. They can be used as input to other selectors.

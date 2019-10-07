@@ -19,6 +19,12 @@ const cartReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 cartItems: addItemToCart(state.cartItems, action.payload) //add new items to the existing list
             }
+
+        case CartActionTypes.CLEAR_ITEM_FROM_CART:
+            return{
+                ...state,
+                cartItems: state.cartItems.filter(cartItem => cartItem.id !== action.payload.id) //we are trying to keep the item with the id of the item that we don't need to clear out, and we remain with new array
+            }    
             default:
                 return state;
         

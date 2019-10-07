@@ -10,3 +10,10 @@ export const addItem = item => ({
     type: CartActionTypes.ADD_ITEM,
     payload: item
 })
+
+//gets an item as a property and set type and payload as the item we need to clear.
+//create type, set type into action and create reducer that executes the type and bind to the appropriate component, e.g checkout component.
+export const clearItemFromCart = item => ({
+    type: CartActionTypes.CLEAR_ITEM_FROM_CART,
+    payload: item
+})

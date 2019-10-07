@@ -2,13 +2,19 @@ import React from 'react';
 import './App.css';
 import {Switch, Route, Redirect} from 'react-router-dom'; //Redirect - to prohibit signin route once user is signed in. to avoid Auth flow
 import {connect} from 'react-redux'; //high order component that lets us modify our component to have access to things related to redux.
+import {createStructuredSelector} from 'reselect';
+
 import HomePage from './Pages/homepage/homepage';
 import ShopPage from './Pages/shop/shop';
 import SignInAndSignUpPage from './Pages/SignIn-SignUp/SignIn-SignUp';
+import CheckoutPage from './Pages/checkout/checkout';
+
 import Header from './Components/header/header';
 import {auth} from './firebase/firebase.utils';
 import { createUserProfileDocument } from './firebase/firebase.utils';
 import {setCurrentUser} from './redux/user/user-actions';
+import {selectCurrentUser} from './redux/user/user-selectors';
+
 
 /*we want to store the state of our user in the App (where from Google signin or email and password), so that when the user logs in, we want to store that in the App state*/
 /*So that, so that we can pass into components that need it, because we want to access the user object throughout the application*/
@@ -59,6 +65,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component = {HomePage}/> 
           <Route path='/shop' component = {ShopPage}/>  
+          <Route exact path='/checkout' component = {CheckoutPage}/>  
           <Route exact path='/signin' render = {() => this.props.currentUser
             ? (<Redirect to='/' />) 
             : (<SignInAndSignUpPage />)}/>  
@@ -72,8 +79,8 @@ class App extends React.Component {
 //render - Javascript invokation that determines what component to return.
 //used to reroute to home page once user is signed in.
 
-const mapStateToProps = ({user}) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector ({
+  currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({ //gets the dispatch property (dispatches the new action we need to pass, SET_CURRENT_USER)

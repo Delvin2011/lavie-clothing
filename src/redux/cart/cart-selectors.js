@@ -9,12 +9,25 @@ export const selectCartItems = createSelector(
     cart => cart.cartItems //outputs of the input selectors
 );
 
+export const selectCartHidden = createSelector(
+    [selectCart], //array of input selectors
+    cart => cart.hidden //outputs of the input selectors
+);
+
 export const selectCartItemsCount = createSelector(
     [selectCartItems],
     cartItems => //returns the total quantity of items
         cartItems.reduce((accumulatedQuantity, cartItem) => accumulatedQuantity + cartItem.quantity,0) //accumulating the quantity of each of our cart items
 
 );
+
+export const selectCartTotal = createSelector (
+    [selectCartItems],
+    cartItems => //returns the total quantity of items
+    cartItems.reduce((accumulatedQuantity, cartItem) => accumulatedQuantity + cartItem.quantity * cartItem.price ,0) //accumulating the quantity of each of our cart items
+
+
+)
 
 /*Flow
 - Passing the reducer state in to the selector and gets the cart object.
