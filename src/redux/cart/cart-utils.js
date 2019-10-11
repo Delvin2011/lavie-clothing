@@ -13,6 +13,24 @@ export const addItemToCart = (cartItems, cartItemToAdd) => { //we will check if 
         //if cartItem is not found in the array, we want to return
         // new array with all the existing cartItems, but also with the an object cartItemToAdd with a base quantity of 1
         //In this way, any of the subsiquent items will reference the base quantity base value
-        return [...cartItems, {...cartItemToAdd, quantity: 1}]
+        return [...cartItems, {...cartItemToAdd, quantity: 1}];
 
-}
+};
+
+export const removeItemFromCart = (cartItems, cartItemToRemove) => { //we will check if the cartItem exist
+    const existingCartItem = cartItems.find(
+        cartItem => cartItem.id === cartItemToRemove.id );
+        
+        if(existingCartItem.quantity === 1) {
+            return cartItems.filter(cartItem => 
+                cartItem.id !== cartItemToRemove.id)}
+
+        return cartItems.map(
+            cartItem =>
+            cartItem.id === cartItemToRemove.id 
+            ? {...cartItems, quantity: cartItem.quantity - 1}
+            : cartItem
+        );
+
+
+    }

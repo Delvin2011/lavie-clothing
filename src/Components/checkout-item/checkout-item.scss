@@ -23,7 +23,16 @@
     }
   
     .quantity {
-      padding-left: 20px;
+      display: flex; //to have the arrows and the quantity horizontally aligned depending on the space
+
+      .arrow {
+        cursor: pointer;
+      }
+
+
+      .value {
+        margin: 0 10px;
+      }
     }
   
     .remove-button {

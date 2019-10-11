@@ -4,13 +4,18 @@
 import { createStore, applyMiddleware} from 'redux';
 import logger from 'redux-logger'; //to use for debugging redux code
 import rootReducer from './root-reducer';
+import { persistStore} from 'redux-persist'; //allow the browser to store the cache
 
 //the middleware that the store is expecting from redux, is going to be an array.
 const middlewares = [logger];
 
 //Create the store object, instantiated with createStore
 //createStore, function that will get the root-reducer and the return value of applyMiddleware
-const store = createStore(rootReducer, applyMiddleware(...middlewares)) //...middleware, is to spread all the values in the array. Pass as individual arguments.
+export const store = createStore(rootReducer, applyMiddleware(...middlewares)); //...middleware, is to spread all the values in the array. Pass as individual arguments.
 
-export default store;
+export const persistor = persistStore(store); //a persisted version of the state
+
+
+
+export default ({store,persistor});
 

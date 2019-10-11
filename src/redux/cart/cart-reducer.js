@@ -1,6 +1,6 @@
 //hide the website when 1st comes to website
 import CartActionTypes from './cart-type';
-import { addItemToCart } from './cart-utils';
+import { addItemToCart, removeItemFromCart } from './cart-utils';
 
 const INITIAL_STATE = {
     hidden: true,
@@ -20,11 +20,19 @@ const cartReducer = (state = INITIAL_STATE, action) => {
                 cartItems: addItemToCart(state.cartItems, action.payload) //add new items to the existing list
             }
 
+            case CartActionTypes.REMOVE_ITEM:
+                return{
+                    ...state,
+                    cartItems: removeItemFromCart(state.cartItems, action.payload) //we are trying to keep the item with the id of the item that we don't need to clear out, and we remain with new array
+                }     
+
         case CartActionTypes.CLEAR_ITEM_FROM_CART:
             return{
                 ...state,
                 cartItems: state.cartItems.filter(cartItem => cartItem.id !== action.payload.id) //we are trying to keep the item with the id of the item that we don't need to clear out, and we remain with new array
-            }    
+            }   
+            
+   
             default:
                 return state;
         
