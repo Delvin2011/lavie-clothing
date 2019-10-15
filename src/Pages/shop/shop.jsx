@@ -1,27 +1,17 @@
 import React from 'react';
-import SHOP_DATA from './shopData.js';
-import PreviewCollection from '../../Components/preview-collection/preview-collection';
+import {Route} from 'react-router-dom'; //putting the collections over-view in a route
+import CollectionsOverview from '../../Components/collections-overview/collections-overview';
+import CollectionPage from '../collection/collection';
 
-class ShopPage extends React.Component {
-    constructor(props) {
-        super(props);
+//inside of the App.js, the shopPage is being nested in a route and it automatically passes the 3 objects (match, location and history) into our component as props
+const ShopPage = ({match}) => ( 
 
-        this.state = {
-               collections: SHOP_DATA
-        };
-    }
-
-    render(){
-        const {collections} = this.state;
-        return (<div className = 'shop-page'>
-        {
-            collections.map( ({id, ...otherCollectionProps}) => (
-                <PreviewCollection key = {id} {...otherCollectionProps}/>
-            ))
-        }
-            
-        </div>);
-    }
-}
+        <div className = 'shop-page'>
+            <Route  exact path = {`${match.path}`} component = {CollectionsOverview}/>
+            <Route path = {`${match.path}/:collectionId`} component = {CollectionPage}></Route>
+        </div>
+);
 
 export default ShopPage;
+//inside div, use string interpolation
+//We want the collection to dynamically pluck off the right category from the reducer so that it knows what to display on the category. E.g hats. 

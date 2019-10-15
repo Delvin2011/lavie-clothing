@@ -6,8 +6,9 @@ import { persistReducer} from 'redux-persist'; //allow the browser to store the 
 import storage from 'redux-persist/lib/storage'; //telling the app to use local library for storage
 
 import userReducer from './user/user-reducer';
-
 import cartReducer from './cart/cart-reducer';
+import directoryReducer from './directory/directory-reducer';
+import shopReducer from './shop/shop-reducer';
 
 const persistConfig = {
     key: 'root', //telling at what point in the reducer we want to start storing everything
@@ -18,7 +19,9 @@ const persistConfig = {
 
 const rootReducer  = combineReducers({
     user: userReducer, //user is the key, passing the reducer that we want. and returns in one giant object.
-    cart: cartReducer
+    cart: cartReducer,
+    directory: directoryReducer,
+    shop: shopReducer
 })
 
 export default persistReducer(persistConfig,rootReducer); // return the modified version of the rootReducer with the persistConfig - persistance capabilities
