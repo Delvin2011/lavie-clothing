@@ -66,3 +66,7 @@
  - Difference between local and seesion storage.
  - Store the state of the cart and persist it when the application refreshes. Pull the local storage and update the cart reducer.
  - npm install redux-persist
+
+ 12. Stripe Account
+  - Handle online payments.
+  - npm install react-stripe-checkout
