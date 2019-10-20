@@ -70,3 +70,9 @@
  12. Stripe Account
   - Handle online payments.
   - npm install react-stripe-checkout
+
+13. Heroku Deployment
+ - https://github.com/mars/create-react-app-buildpack
+ - heroku create $APP_NAME --buildpack mars/create-react-app
+ - This buildpack deploys a React UI as a static web site. The Nginx web server provides optimum performance and security for the runtime.
+ - (Git + Heroku commands) https://www.udemy.com/course/complete-react-developer-zero-to-mastery/learn/lecture/15185126#questions
