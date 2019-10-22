@@ -76,3 +76,15 @@
  - heroku create $APP_NAME --buildpack mars/create-react-app
  - This buildpack deploys a React UI as a static web site. The Nginx web server provides optimum performance and security for the runtime.
  - (Git + Heroku commands) https://www.udemy.com/course/complete-react-developer-zero-to-mastery/learn/lecture/15185126#questions
+
+14. Node
+ - An environment that allows us to write Javascript outside of the browser
+ - API - application programming interface. Different endpoints that get exposed from the server, that we are able to make request to.
+ - https://github.com/Delvin2011/lavie-clothing-Backend.git
+
+
+ 15. npm install axios
+
+ 16. Git
+  - .git holds the history of everything that happened
+  - 

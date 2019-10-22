@@ -24,6 +24,13 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
   //the 'exists' on the snapShot tells us if their is any user data.
   // if no data, create data using the user.Auth object (take from the object what we need to stroe in the database) and put in users collection.
+  
+  const collectionRef = firestore.collection('users'); //query collection of users in firebase
+  const collectionSnapshot = await collectionRef.get(); //docs, empty, size. - gives us an array of docs inside of the collection.
+  console.log({collection: collectionSnapshot.docs.map(doc => doc.data())});
+  
+  
+  
   if(!snapShot.exists) {
     const {displayName, email} = userAuth;
     const createdAt = new Date(); //the time when the is created.
@@ -45,6 +52,42 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
   console.log(snapShot);
   return userRef;
+}
+
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  const collectionRef = firestore.collection(collectionKey);
+
+  const batch = firestore.batch();
+  objectsToAdd.forEach(obj => {
+    const newDocRef = collectionRef.doc();//we want to get the doc at an empty string. Asking firebase to give a new doc ref and randomly generete an ID
+    batch.set(newDocRef, obj)
+  });
+return await batch.commit(); //will fire off the batch request and returns a promise
+
+  //console.log(collectionRef); //firestore will always return a ref and when commit succeeds it will come back and resolve a void value/null
+}
+
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformedCollection = collections.docs.map(doc => {
+    const {title, items} = doc.data();
+
+    return {
+      routeName: encodeURI(title.toLowerCase()), //javascript - pass it any string and it will return any characters URL can't handle/process e.g symbol 
+      id: doc.id,
+      title,
+      items
+    }
+  });
+
+  //the initla object goew into the 1st new collection, and sets the 1st value equal to the title but in lowe case e.g hats
+  // returns hats and goes intno the 2nd object.
+  //until we have an object where the titles of all the 5 collection objects are the keys and they equal their respective objects
+  return transformedCollection.reduce((accumulator,collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {});
+  
+  //console.log(transformedCollection);
 }
 
   //required for google authentication
